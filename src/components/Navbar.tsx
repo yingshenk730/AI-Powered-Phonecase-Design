@@ -1,33 +1,16 @@
-'use client'
 import Link from 'next/link'
 import MaxWidthWrapper from './MaxWidthWrapper'
-import { Button, buttonVariants } from './ui/button'
+import { buttonVariants } from './ui/button'
 import { ArrowRight } from 'lucide-react'
-import { useSession } from 'next-auth/react'
-import { signOut } from 'next-auth/react'
-import { useEffect, useState } from 'react'
-import { useCurrentUser } from '@/hooks/useCurrentUser'
-import { User } from 'next-auth'
-import { fetchUser } from '@/actions/fetchUser'
-import { useQuery } from '@tanstack/react-query'
+import LogoutBtn from './LogoutBtn'
+import { auth } from '@/auth'
 
-const Navbar = () => {
-  const [username, setUsername] = useState<string | null>(null)
-  useEffect(() => {
-    const getUser = async () => {
-      const user = await fetchUser()
-      if (user && user.name) {
-        setUsername(user.name)
-      }
-    }
-    getUser()
-  })
-  // console.log('username: ', username)
-  const isAdmin = true
+const Navbar = async () => {
+  const session = await auth()
+  // console.log('session: ', session)
 
-  const handleLogout = () => {
-    signOut({ callbackUrl: '/' })
-  }
+  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL
+  const isAdmin = session?.user?.email === ADMIN_EMAIL
 
   return (
     <nav className=" sticky z-[100] inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
@@ -37,16 +20,18 @@ const Navbar = () => {
             case <span className="text-green-600">cobra</span>
           </Link>
           <div className="h-full flex items-center ">
-            {username ? (
+            {session?.user?.name ? (
               <>
-                <div className="text-sm">{username}</div>
-                <Button size="sm" variant="ghost" onClick={handleLogout}>
-                  Logout
-                </Button>
+                <Link href={`/profile/${session?.user?.id}`}>
+                  <div className=" h-8 w-8 rounded-full bg-primary text-zinc-100 hover:font-bold flex items-center justify-center">
+                    {`${session?.user.name.slice(0, 1).toUpperCase()}`}
+                  </div>
+                </Link>
+                <LogoutBtn />
                 {isAdmin && (
                   <Link
                     className={buttonVariants({ size: 'sm', variant: 'ghost' })}
-                    href="/">
+                    href="/dashboard">
                     Dashboard
                   </Link>
                 )}

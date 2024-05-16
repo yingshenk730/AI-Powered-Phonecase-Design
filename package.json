@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.1.0",
@@ -22,6 +23,7 @@
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
+    "@react-email/components": "^0.0.17",
     "@tanstack/react-query": "^5.36.0",
     "@uploadthing/react": "^6.5.3",
     "bcryptjs": "^2.4.3",
@@ -39,6 +41,7 @@
     "react-hook-form": "^7.51.4",
     "react-icons": "^5.2.1",
     "react-rnd": "^10.4.10",
+    "resend": "^3.2.0",
     "sharp": "^0.32.6",
     "stripe": "^15.6.0",
     "tailwind-merge": "^2.3.0",

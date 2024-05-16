@@ -89,10 +89,10 @@ const DesignPreview = ({ configuration }: { configuration: Configure }) => {
         />
       </div>
       <LoginModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
-      <div className=" mt-16 grid grid-cols-1 text-sm md:grid-cols-12 sm:gap-x-6 lg:gap-x-12 ">
-        <div className="sm:col-span-4 lg:col-span-3 max-w-60 md:max-w-[400px] ">
+      <div className=" mt-16 flex flex-col items-center md:grid text-sm md:grid-cols-12 sm:gap-x-6 lg:gap-x-12">
+        <div className="md:col-span-4 lg:col-span-3 max-w-60 md:max-w-[400px] ">
           <Phone
-            className={cn(`bg-${twColor}`)}
+            className={cn(`bg-${twColor}`, 'max-w-[150px] md:max-w-full')}
             imgSrc={configuration.croppedImageUrl!}
           />
         </div>

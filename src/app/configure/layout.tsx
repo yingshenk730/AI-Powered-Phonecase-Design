@@ -4,7 +4,7 @@ import React from 'react'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <MaxWidthWrapper className="flex-1 flex flex-col py-6">
+    <MaxWidthWrapper className="min-h-[calc(100vh-114px)] flex-1 flex flex-col py-6 ">
       <Steps />
       {children}
     </MaxWidthWrapper>

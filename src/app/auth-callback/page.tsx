@@ -31,7 +31,7 @@ const Page = () => {
         router.push('/')
       }
     }
-  }, [data, configId, router]) // 添加 router 作为依赖项
+  }, [data, configId, router])
 
   return (
     <div className="w-full mt-24 flex justify-center">
