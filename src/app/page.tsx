@@ -216,14 +216,14 @@ export default function Home() {
               />
               <div className="relative h-80 md:h-full w-full md:justify-self-end max-w-sm rounded-xl  lg:rounded-2xl">
                 <Image
-                  src="/horse.jpg"
+                  src="/kid.jpg"
                   width={853}
                   height={1280}
                   className="rounded-md object-cover bg-white shadow-2xl ring-2 ring-gray-900/10 h-full w-full"
                   alt=" "
                 />
               </div>
-              <Phone imgSrc="/horse_phone.jpg" className="w-60" />
+              <Phone imgSrc="/kid_phone.jpg" className="w-60" />
             </div>
           </div>
           <ul className="mx-auto mt-12 max-w-prose sm:text-lg space-y-2 w-fit">
