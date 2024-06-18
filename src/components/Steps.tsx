@@ -1,40 +1,40 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { url } from 'inspector'
-import Image from 'next/image'
+// import { url } from 'inspector'
+// import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const STEPS = [
   {
     name: 'Step 1: Add  image',
     description: 'Upload an image to get started',
-    url: '/upload',
+    urls: ['/upload', '/generate-image'],
     imgSrc: '/snake-1.png',
   },
   {
     name: 'Step 2: Customize design',
     description: 'Make your phonecase',
-    url: '/design',
+    urls: ['/design'],
     imgSrc: '/snake-2.png',
   },
   {
     name: 'Step 3: Summary',
     description: 'Review your final design',
-    url: '/preview',
+    urls: ['/preview'],
     imgSrc: '/snake-3.png',
   },
 ]
 
 const Steps = () => {
   const pathname = usePathname()
-
+  console.log(pathname)
   return (
     <ol className=" lg:flex">
       {STEPS.map((step, i) => {
-        const isCurrent = pathname.endsWith(step.url)
-        const isCompleted = STEPS.slice(i + 1).some((step) =>
-          pathname.endsWith(step.url)
+        const isCurrent = step.urls.some((url) => pathname.endsWith(url))
+        const isCompleted = STEPS.slice(i + 1).some((s) =>
+          s.urls.some((url) => pathname.endsWith(url))
         )
 
         return (
