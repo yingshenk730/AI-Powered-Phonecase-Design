@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server'
 import Replicate from 'replicate'
 
-enum WebhookEventType {
-  Start = 'start',
-  Completed = 'completed',
-}
+// enum WebhookEventType {
+//   Start = 'start',
+//   Completed = 'completed',
+// }
 
 // Update your interface to use WebhookEventType:
 interface PredictionOptions {
@@ -19,8 +19,8 @@ interface PredictionOptions {
     width?: number
     height?: number
   }
-  webhook?: string
-  webhook_events_filter?: WebhookEventType[]
+  // webhook?: string
+  // webhook_events_filter?: WebhookEventType[]
 }
 
 const replicate = new Replicate({
@@ -29,9 +29,9 @@ const replicate = new Replicate({
 
 // In production and preview deployments (on Vercel), the VERCEL_URL environment variable is set.
 // In development (on your local machine), the NGROK_HOST environment variable is set.
-const WEBHOOK_HOST = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : process.env.NGROK_HOST
+// const WEBHOOK_HOST = process.env.VERCEL_URL
+//   ? `https://${process.env.VERCEL_URL}`
+//   : process.env.NGROK_HOST
 
 export async function POST(request: Request) {
   if (!process.env.REPLICATE_API_TOKEN) {
@@ -54,13 +54,13 @@ export async function POST(request: Request) {
     },
   }
 
-  if (WEBHOOK_HOST) {
-    options.webhook = `${WEBHOOK_HOST}/api/image-webhooks`
-    options.webhook_events_filter = [
-      WebhookEventType.Start,
-      WebhookEventType.Completed,
-    ]
-  }
+  // if (WEBHOOK_HOST) {
+  //   options.webhook = `${WEBHOOK_HOST}/api/image-webhooks`
+  //   options.webhook_events_filter = [
+  //     WebhookEventType.Start,
+  //     WebhookEventType.Completed,
+  //   ]
+  // }
 
   const prediction = await replicate.predictions.create(options)
 

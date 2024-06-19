@@ -1,7 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Progress } from '@/components/ui/progress'
 import { useUploadThing } from '@/lib/uploadthing'
 import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
@@ -61,20 +60,17 @@ const Page = () => {
   }
   const handleClick = async () => {
     try {
-      const response = await fetch(prediction?.output[0]) // 从URL下载图片
+      const response = await fetch(prediction?.output[0])
       console.log('response', response)
-      const blob = await response.blob() // 转换为Blob
+      const blob = await response.blob()
 
-      // 创建一个File对象，需要文件名和类型，这里根据URL后缀和Blob类型设置
-      const fileType = prediction?.output[0].split('.').pop() // 从URL获取文件类型
+      const fileType = prediction?.output[0].split('.').pop()
       const file = new File([blob], `downloadedImage.${fileType}`, {
         type: blob.type,
       })
 
-      // 将File对象放入数组中
       const filesArray = [file]
 
-      // 调用startUpload函数，传入File数组和配置对象
       startUpload(filesArray, { configureId: undefined })
     } catch (error) {
       console.error('Failed to download and upload image:', error)
@@ -103,9 +99,9 @@ const Page = () => {
           {prediction.output && (
             <div className="w-full flex flex-col items-center justify-center">
               {isUploading || isPending ? (
-                <Button className="mt-6">
+                <Button className="mt-6" isLoading={true} disabled={true}>
                   Loading
-                  <Loader2 className="ml-2 w-5 h-5  inline-block" />
+                  <Loader2 className="ml-2 w-5 h-5 animate-spin inline-block" />
                 </Button>
               ) : (
                 <Button className="mt-6" onClick={handleClick}>
