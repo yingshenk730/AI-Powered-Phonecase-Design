@@ -9,7 +9,16 @@ enum WebhookEventType {
 // Update your interface to use WebhookEventType:
 interface PredictionOptions {
   version: string
-  input: { prompt: any; output_format?: string; steps?: number }
+  input: {
+    prompt: any
+    output_format?: string
+    steps?: number
+    num_inference_steps?: number
+    negative_prompt?: string
+    num_outputs?: number
+    width?: number
+    height?: number
+  }
   webhook?: string
   webhook_events_filter?: WebhookEventType[]
 }
@@ -35,7 +44,14 @@ export async function POST(request: Request) {
 
   const options: PredictionOptions = {
     version: process.env.REPLICATE_MODEL_ID as string,
-    input: { prompt },
+    input: {
+      prompt,
+      width: 1024,
+      height: 1024,
+      num_outputs: 1,
+      negative_prompt: 'worst quality, low quality',
+      num_inference_steps: 4,
+    },
   }
 
   if (WEBHOOK_HOST) {
