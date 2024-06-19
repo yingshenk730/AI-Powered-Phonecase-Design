@@ -26,7 +26,7 @@ const OrderReceivedEmail = ({
   const baseUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : 'https://ai-casedesign.vercel.app'
+      : process.env.NEXT_PUBLIC_BASE_URL
 
   return (
     <Html>

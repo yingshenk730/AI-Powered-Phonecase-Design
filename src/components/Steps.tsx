@@ -28,7 +28,6 @@ const STEPS = [
 
 const Steps = () => {
   const pathname = usePathname()
-  console.log(pathname)
   return (
     <ol className=" lg:flex">
       {STEPS.map((step, i) => {

@@ -61,7 +61,7 @@ const Page = () => {
   const handleClick = async () => {
     try {
       const response = await fetch(prediction?.output[0])
-      console.log('response', response)
+      // console.log('response', response)
       const blob = await response.blob()
 
       const fileType = prediction?.output[0].split('.').pop()
