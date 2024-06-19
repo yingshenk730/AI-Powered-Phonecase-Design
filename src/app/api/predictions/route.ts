@@ -34,7 +34,7 @@ export async function POST(request: Request) {
   const { prompt } = await request.json()
 
   const options: PredictionOptions = {
-    version: '7762fd07cf82c948538e41f63f77d685e02b063e37e496e96eefd46c929f9bdc',
+    version: process.env.REPLICATE_MODEL_ID as string,
     input: { prompt },
   }
 
